@@ -154,6 +154,37 @@ keys.</p>
 </pre></div>
 </div>
 </section>
+<section id="config-parameters">
+<h1>Config Parameters<a class="headerlink" href="#config-parameters" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span> <span class="nc">UA_ConfigParameter</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">UA_ConfigParameter</span><span class="w"> </span><span class="o">*</span><span class="n">next</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Linked list */</span><span class="w"></span>
+<span class="w">    </span><span class="n">UA_Variant</span><span class="w"> </span><span class="n">param</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[];</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">UA_ConfigParameter</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/* cp must point to the start of the linked list. overrides any parameter of the</span>
+<span class="cm"> * same name. The variant is copied. */</span><span class="w"></span>
+<span class="n">UA_StatusCode</span><span class="w"></span>
+<span class="nf">UA_ConfigParameter_setParameter</span><span class="p">(</span><span class="n">UA_ConfigParameter</span><span class="w"> </span><span class="o">**</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="n">parameter</span><span class="p">);</span><span class="w"></span>
+
+<span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="nf">UA_ConfigParameter_getParameter</span><span class="p">(</span><span class="n">UA_ConfigParameter</span><span class="w"> </span><span class="o">*</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+
+<span class="cm">/* Returns NULL if the parameter is not defined or not of the right datatype */</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="nf">UA_ConfigParameter_getScalarParameter</span><span class="p">(</span><span class="n">UA_ConfigParameter</span><span class="w"> </span><span class="o">*</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                      </span><span class="k">const</span><span class="w"> </span><span class="n">UA_DataType</span><span class="w"> </span><span class="o">*</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="nf">UA_ConfigParameter_getArrayParameter</span><span class="p">(</span><span class="n">UA_ConfigParameter</span><span class="w"> </span><span class="o">*</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                     </span><span class="k">const</span><span class="w"> </span><span class="n">UA_DataType</span><span class="w"> </span><span class="o">*</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+
+<span class="cm">/* cp must point to the start of the linked list */</span><span class="w"></span>
+<span class="kt">void</span><span class="w"></span>
+<span class="nf">UA_ConfigParameter_delete</span><span class="p">(</span><span class="n">UA_ConfigParameter</span><span class="w"> </span><span class="o">**</span><span class="n">cp</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
 <section id="endpoint-url-parser">
 <h1>Endpoint URL Parser<a class="headerlink" href="#endpoint-url-parser" title="Permalink to this headline">¶</a></h1>
 <p>The endpoint URL parser is generally useful for the implementation of network

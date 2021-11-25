@@ -89,6 +89,9 @@ The :ref:`tutorials` provide a good starting point for this.
                                                  * up together with the
                                                  * configuration. So it is possible
                                                  * to allocate them on ROM. */
+       /* EventLoop */
+       UA_EventLoop *eventLoop;
+       UA_Boolean externalEventLoop; /* The EventLoop is not deleted with the config */
    
        /* Available SecurityPolicies */
        size_t securityPoliciesSize;

@@ -79,6 +79,10 @@ The :ref:`tutorials` provide a good starting point for this.
 .. code-block:: c
 
    
+       /* EventLoop */
+       UA_EventLoop *eventLoop;
+       UA_Boolean externalEventLoop; /* The EventLoop is not deleted with the config */
+   
        /* Networking */
        size_t networkLayersSize;
        UA_ServerNetworkLayer *networkLayers;

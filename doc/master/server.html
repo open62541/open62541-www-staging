@@ -176,7 +176,11 @@ The usual usage is as follows:</p>
 with custom data types are provided in
 <code class="docutils literal notranslate"><span class="pre">/examples/custom_datatype/</span></code>.</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cm">/* Networking */</span><span class="w"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cm">/* EventLoop */</span><span class="w"></span>
+<span class="w">    </span><span class="n">UA_EventLoop</span><span class="w"> </span><span class="o">*</span><span class="n">eventLoop</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">UA_Boolean</span><span class="w"> </span><span class="n">externalEventLoop</span><span class="p">;</span><span class="w"> </span><span class="cm">/* The EventLoop is not deleted with the config */</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/* Networking */</span><span class="w"></span>
 <span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">networkLayersSize</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="n">UA_ServerNetworkLayer</span><span class="w"> </span><span class="o">*</span><span class="n">networkLayers</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="n">UA_String</span><span class="w"> </span><span class="n">customHostname</span><span class="p">;</span><span class="w"></span>
