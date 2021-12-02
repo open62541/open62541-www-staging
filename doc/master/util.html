@@ -113,75 +113,26 @@ keys.</p>
 <span class="cm"> * invalidates pointers into the previous array. If the key exists already, the</span>
 <span class="cm"> * value is overwritten. */</span><span class="w"></span>
 <span class="n">UA_StatusCode</span><span class="w"></span>
-<span class="nf">UA_KeyValueMap_setQualified</span><span class="p">(</span><span class="n">UA_KeyValuePair</span><span class="w"> </span><span class="o">**</span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="n">mapSize</span><span class="p">,</span><span class="w"></span>
-<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">UA_QualifiedName</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">,</span><span class="w"></span>
-<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
-
-<span class="cm">/* Simplified version that assumes the key is in namespace 0 */</span><span class="w"></span>
-<span class="n">UA_StatusCode</span><span class="w"></span>
 <span class="nf">UA_KeyValueMap_set</span><span class="p">(</span><span class="n">UA_KeyValuePair</span><span class="w"> </span><span class="o">**</span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="n">mapSize</span><span class="p">,</span><span class="w"></span>
-<span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
+<span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="n">UA_QualifiedName</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"></span>
+<span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
 
-<span class="cm">/* Returns a pointer into underlying array or NULL if the key is not found.*/</span><span class="w"></span>
-<span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="nf">UA_KeyValueMap_getQualified</span><span class="p">(</span><span class="n">UA_KeyValuePair</span><span class="w"> </span><span class="o">*</span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">mapSize</span><span class="p">,</span><span class="w"></span>
-<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">UA_QualifiedName</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">);</span><span class="w"></span>
-
-<span class="cm">/* Simplified version that assumes the key is in namespace 0 */</span><span class="w"></span>
+<span class="cm">/* Returns a pointer to the value or NULL if the key is not found.*/</span><span class="w"></span>
 <span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
 <span class="nf">UA_KeyValueMap_get</span><span class="p">(</span><span class="n">UA_KeyValuePair</span><span class="w"> </span><span class="o">*</span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">mapSize</span><span class="p">,</span><span class="w"></span>
-<span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">);</span><span class="w"></span>
+<span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="n">UA_QualifiedName</span><span class="w"> </span><span class="n">key</span><span class="p">);</span><span class="w"></span>
 
 <span class="cm">/* Returns NULL if the value for the key is not defined or not of the right</span>
 <span class="cm"> * datatype and scalar/array */</span><span class="w"></span>
-<span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
 <span class="nf">UA_KeyValueMap_getScalar</span><span class="p">(</span><span class="n">UA_KeyValuePair</span><span class="w"> </span><span class="o">*</span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">mapSize</span><span class="p">,</span><span class="w"></span>
-<span class="w">                         </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">UA_DataType</span><span class="w"> </span><span class="o">*</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
-
-<span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="nf">UA_KeyValueMap_getArray</span><span class="p">(</span><span class="n">UA_KeyValuePair</span><span class="w"> </span><span class="o">*</span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">mapSize</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">UA_DataType</span><span class="w"> </span><span class="o">*</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<span class="w">                         </span><span class="k">const</span><span class="w"> </span><span class="n">UA_QualifiedName</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"></span>
+<span class="w">                         </span><span class="k">const</span><span class="w"> </span><span class="n">UA_DataType</span><span class="w"> </span><span class="o">*</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
 
 <span class="cm">/* Remove a single entry. To delete the entire map, use UA_Array_delete. */</span><span class="w"></span>
 <span class="kt">void</span><span class="w"></span>
-<span class="nf">UA_KeyValueMap_deleteQualified</span><span class="p">(</span><span class="n">UA_KeyValuePair</span><span class="w"> </span><span class="o">**</span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="n">mapSize</span><span class="p">,</span><span class="w"></span>
-<span class="w">                               </span><span class="k">const</span><span class="w"> </span><span class="n">UA_QualifiedName</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">);</span><span class="w"></span>
-
-<span class="cm">/* Simplified version that assumes the key is in namespace 0 */</span><span class="w"></span>
-<span class="kt">void</span><span class="w"></span>
 <span class="nf">UA_KeyValueMap_delete</span><span class="p">(</span><span class="n">UA_KeyValuePair</span><span class="w"> </span><span class="o">**</span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="n">mapSize</span><span class="p">,</span><span class="w"></span>
-<span class="w">                      </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">);</span><span class="w"></span>
-</pre></div>
-</div>
-</section>
-<section id="config-parameters">
-<h1>Config Parameters<a class="headerlink" href="#config-parameters" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span> <span class="nc">UA_ConfigParameter</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">struct</span> <span class="nc">UA_ConfigParameter</span><span class="w"> </span><span class="o">*</span><span class="n">next</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Linked list */</span><span class="w"></span>
-<span class="w">    </span><span class="n">UA_Variant</span><span class="w"> </span><span class="n">param</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[];</span><span class="w"></span>
-<span class="p">}</span><span class="w"> </span><span class="n">UA_ConfigParameter</span><span class="p">;</span><span class="w"></span>
-
-<span class="cm">/* cp must point to the start of the linked list. overrides any parameter of the</span>
-<span class="cm"> * same name. The variant is copied. */</span><span class="w"></span>
-<span class="n">UA_StatusCode</span><span class="w"></span>
-<span class="nf">UA_ConfigParameter_setParameter</span><span class="p">(</span><span class="n">UA_ConfigParameter</span><span class="w"> </span><span class="o">**</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                </span><span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="n">parameter</span><span class="p">);</span><span class="w"></span>
-
-<span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="nf">UA_ConfigParameter_getParameter</span><span class="p">(</span><span class="n">UA_ConfigParameter</span><span class="w"> </span><span class="o">*</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">);</span><span class="w"></span>
-
-<span class="cm">/* Returns NULL if the parameter is not defined or not of the right datatype */</span><span class="w"></span>
-<span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="nf">UA_ConfigParameter_getScalarParameter</span><span class="p">(</span><span class="n">UA_ConfigParameter</span><span class="w"> </span><span class="o">*</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                      </span><span class="k">const</span><span class="w"> </span><span class="n">UA_DataType</span><span class="w"> </span><span class="o">*</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
-<span class="k">const</span><span class="w"> </span><span class="n">UA_Variant</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="nf">UA_ConfigParameter_getArrayParameter</span><span class="p">(</span><span class="n">UA_ConfigParameter</span><span class="w"> </span><span class="o">*</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                     </span><span class="k">const</span><span class="w"> </span><span class="n">UA_DataType</span><span class="w"> </span><span class="o">*</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
-
-<span class="cm">/* cp must point to the start of the linked list */</span><span class="w"></span>
-<span class="kt">void</span><span class="w"></span>
-<span class="nf">UA_ConfigParameter_delete</span><span class="p">(</span><span class="n">UA_ConfigParameter</span><span class="w"> </span><span class="o">**</span><span class="n">cp</span><span class="p">);</span><span class="w"></span>
+<span class="w">                      </span><span class="k">const</span><span class="w"> </span><span class="n">UA_QualifiedName</span><span class="w"> </span><span class="n">key</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 </section>

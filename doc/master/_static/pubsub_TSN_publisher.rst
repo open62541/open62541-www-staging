@@ -361,7 +361,7 @@ callback function with the custom (user-specified) callback interval.
            char threadNamePub[10] = "Publisher";
            *callbackId            = threadCreation((UA_Int16)pubPriority, (size_t)pubCore, publisherETF, threadNamePub, threadArguments);
            UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,
-                       "Publisher thread callback Id: %ld\n", *callbackId);
+                       "Publisher thread callback Id: %lu\n", (unsigned long)*callbackId);
    #endif
        }
        else {
@@ -370,7 +370,7 @@ callback function with the custom (user-specified) callback interval.
            char threadNameSub[11] = "Subscriber";
            *callbackId            = threadCreation((UA_Int16)subPriority, (size_t)subCore, subscriber, threadNameSub, threadArguments);
            UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,
-                       "Subscriber thread callback Id: %ld\n", *callbackId);
+                       "Subscriber thread callback Id: %lu\n", (unsigned long)*callbackId);
    #endif
        }
    
@@ -390,9 +390,9 @@ callback function with the custom (user-specified) callback interval.
    /* Remove the callback added for cyclic repetition */
    static void
    removePubSubApplicationCallback(UA_Server *server, UA_NodeId identifier, UA_UInt64 callbackId) {
-       if(callbackId && (pthread_join(callbackId, NULL) != 0))
+       if(callbackId && (pthread_join((pthread_t)callbackId, NULL) != 0))
            UA_LOG_WARNING(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,
-                          "Pthread Join Failed thread: %ld\n", callbackId);
+                          "Pthread Join Failed thread: %lu\n", (unsigned long)callbackId);
    }
    
 **External data source handling**
@@ -926,7 +926,8 @@ The published data is updated in the array using this function
        }
    
        if(consolePrint)
-           UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,"Pub:%ld,%ld.%09ld\n", counterValue, start_time.tv_sec, start_time.tv_nsec);
+           UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,"Pub:%lu,%ld.%09ld\n",
+                       (long unsigned)counterValue, start_time.tv_sec, start_time.tv_nsec);
    
    
        if (signalTerm != UA_TRUE){
@@ -953,7 +954,8 @@ The subscribed data is updated in the array using this function Subscribed data 
        }
    
        if(consolePrint)
-           UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,"Sub:%ld,%ld.%09ld\n", counterValue, receive_time.tv_sec, receive_time.tv_nsec);
+           UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,"Sub:%lu,%ld.%09ld\n",
+                       (long unsigned)counterValue, receive_time.tv_sec, receive_time.tv_nsec);
    
        if (signalTerm != UA_TRUE)
        {
@@ -1224,7 +1226,7 @@ created thread.
            UA_LOG_WARNING(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,":%s Cannot create thread\n", applicationName);
    
        if (CPU_ISSET(coreAffinity, &cpuset))
-           UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,"%s CPU CORE: %ld\n", applicationName, coreAffinity);
+           UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,"%s CPU CORE: %lu\n", applicationName, (unsigned long)coreAffinity);
    
       return threadID;
    }
@@ -1422,8 +1424,8 @@ and writes the result in a csv.
    
            if(((latencyCharIndex - prevLatencyCharIndex) + latencyCharIndex + 3) < MAX_MEASUREMENTS_FILEWRITE) {
                latencyCharIndex += (UA_UInt64)sprintf(&latency_measurements[latencyCharIndex],
-                                                      "%0.3f, %ld, %ld\n",
-                                                      finalTime, missed_counter, repeated_counter);
+                                                      "%0.3f, %lu, %lu\n",
+                                                      finalTime, (unsigned long)missed_counter, (unsigned long)repeated_counter);
            }
            else {
                UA_LOG_WARNING(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND,
@@ -1435,7 +1437,7 @@ and writes the result in a csv.
        }
    
        /* Write into the latency file */
-       fwrite(&latency_measurements[0], prevLatencyCharIndex, 1, fp_latency);
+       fwrite(&latency_measurements[0], (size_t)prevLatencyCharIndex, 1, fp_latency);
        fclose(fp_latency);
    }
    #endif
